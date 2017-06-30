@@ -9,6 +9,9 @@
 // triggers the key you pressed AND switches the layout back to the original. For now I do this with a super kludgey macro and I
 // look forward to learning about a more elegant way to do the same thing. Until then, this will have to do.
 
+enum {
+  TD_SCOL_COLN = 0
+};
 
 // TODO: Define layer names that make sense for the ErgoDox EZ.
 #define BASE 0 // default layer
@@ -20,16 +23,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * |   `    |   1  |   2  |   3  |   4  |   5  | LEFT |           | RIGHT|   6  |   7  |   8  |   9  |   0  |   -    |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * | Tab    |   Q  |   D  |   R  |   W  |   B  |  L1  |           |  L4  |   J  |   F  |   U  |   P  |   ;  |        |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * | Hyper  |   A  |   S  |   H  |   T  |   G  |------|           |------|   Y  |   N  |   E  |   O  |   I  |   '    |
- * |--------+------+------+------+------+------|  L2  |           | Meh  |------+------+------+------+------+--------|
- * | LSPCad |   Z  |   X  |   M  |   C  |   V  |      |           |      |   K  |   L  |   ,  |   .  |//Ctrl| RSPCad |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
- *   |      |      | CTRL |  OPT |  CMD |                                       | Left | Down |  Up  | Right|  L3  |
- *   `----------------------------------'                                       `----------------------------------'
+ * |   `    |   1  |   2  |   3  |   4  |   5  | LEFT |           | RIGHT|   6  |   7  |   8  |   9  |   0   |   -    |
+ * |--------+------+------+------+------+-------------|           |------+------+------+------+------+-------+--------|
+ * | Tab    |   Q  |   D  |   R  |   W  |   B  |  L1  |           |  L4  |   J  |   F  |   U  |   P  |;/TD(:)|   \    |
+ * |--------+------+------+------+------+------|      |           |      |------+------+------+------+-------+--------|
+ * | Hyper  |   A  |   S  |   H  |   T  |   G  |------|           |------|   Y  |   N  |   E  |   O  |   I   |   '    |
+ * |--------+------+------+------+------+------|  L2  |           | Meh  |------+------+------+------+-------+--------|
+ * | LSPCad |   Z  |   X  |   M  |   C  |   V  |      |           |      |   K  |   L  |   ,  |   .  |//Ctrl | RSPCad |
+ * `--------+------+------+------+------+-------------'           `-------------+------+------+------+-------+--------'
+ *   |      |      | CTRL |  OPT |  CMD |                                       | Left | Down |  Up  | Right |  L3  |
+ *   `----------------------------------'                                       `-----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |        |
  *                                 ,------|------|------|       |------+--------+------.
@@ -51,11 +54,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                               KC_HOME,
                                                KC_BSPC, KC_DEL,KC_END,
         // right hand
-             KC_RGHT,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_MINS,
-             TG(DEAD),       KC_J,   KC_F,   KC_U,   KC_P,   KC_SCLN,          KC_BSLS,
-                          KC_Y,   KC_N,   KC_E,   KC_O,   KC_I,             KC_QUOT,
-             MEH_T(KC_NO),KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   KC_RSPC,
-                                  KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_FN4,
+             KC_RGHT,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             	KC_MINS,
+             TG(DEAD),    KC_J,   KC_F,   KC_U,   KC_P,   TD(TD_SCOL_COLN),	KC_BSLS,
+                          KC_Y,   KC_N,   KC_E,   KC_O,   KC_I,             	KC_QUOT,
+             MEH_T(KC_NO),KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   	KC_RSPC,
+                                  KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          	KC_FN4,
              KC_NO,        KC_NO,
              KC_PGUP,
              KC_PGDN,KC_ENT,KC_SPC
@@ -192,6 +195,13 @@ const uint16_t PROGMEM fn_actions[] = {
     [2] = ACTION_LAYER_ON(BASE,0),                       // FN2 - Go back to the base layer
     [3] = ACTION_LAYER_ON(DEAD,0),
     [4] = ACTION_LAYER_TOGGLE(DEAD),
+};
+
+//Tap Dance Definitions
+qk_tap_dance_action_t tap_dance_actions[] = {
+  //Tap once for ';' , twice for ':'
+  [TD_SCOL_COLN]  = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN)
+// Other declarations would go here, separated by commas, if you have them
 };
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
