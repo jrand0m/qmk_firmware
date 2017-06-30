@@ -26,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
  * | Hyper  |   A  |   S  |   H  |   T  |   G  |------|           |------|   Y  |   N  |   E  |   O  |   I  |   '    |
  * |--------+------+------+------+------+------|  L2  |           | Meh  |------+------+------+------+------+--------|
- * | LShift |   Z  |   X  |   M  |   C  |   V  |      |           |      |   K  |   L  |   ,  |   .  |//Ctrl| RShift |
+ * | LSPCad |   Z  |   X  |   M  |   C  |   V  |      |           |      |   K  |   L  |   ,  |   .  |//Ctrl| RSPCad |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |      |      | CTRL |  OPT |  CMD |                                       | Left | Down |  Up  | Right|  L3  |
  *   `----------------------------------'                                       `----------------------------------'
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GRV,         KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_LEFT,
         KC_TAB,         KC_Q,         KC_D,   KC_R,   KC_W,   KC_B,   TG(SYMB),
         ALL_T(KC_ESC),  KC_A,         KC_S,   KC_H,   KC_T,   KC_G,
-        KC_LSFT,        KC_Z,         KC_X,   KC_M,   KC_C,   KC_V,   TG(MDIA),
+        KC_LSPO,        KC_Z,         KC_X,   KC_M,   KC_C,   KC_V,   TG(MDIA),
         KC_NO,          KC_NO,        KC_LCTL,KC_LALT,KC_LGUI,
                                               KC_NO,  KC_NO,
                                                               KC_HOME,
@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
              KC_RGHT,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             KC_MINS,
              TG(DEAD),       KC_J,   KC_F,   KC_U,   KC_P,   KC_SCLN,          KC_BSLS,
                           KC_Y,   KC_N,   KC_E,   KC_O,   KC_I,             KC_QUOT,
-             MEH_T(KC_NO),KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   KC_RSFT,
+             MEH_T(KC_NO),KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   KC_RSPC,
                                   KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          KC_FN4,
              KC_NO,        KC_NO,
              KC_PGUP,
