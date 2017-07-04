@@ -10,7 +10,9 @@
 // look forward to learning about a more elegant way to do the same thing. Until then, this will have to do.
 
 enum {
-  TD_SCOL_COLN = 0
+  TD_SCOL_COLN   = 0,
+  TD_LSQBR_PLUS  = 1,
+  TD_RSQBR_EQ    = 2,
 };
 
 // TODO: Define layer names that make sense for the ErgoDox EZ.
@@ -22,17 +24,17 @@ enum {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
- * ,--------------------------------------------------.           ,--------------------------------------------------.
- * | GR_ESC |   1  |   2  |   3  |   4  |   5  | LEFT |           | RIGHT|   6  |   7  |   8  |   9  |   0   |   -    |
- * |--------+------+------+------+------+-------------|           |------+------+------+------+------+-------+--------|
- * | Tab    |   Q  |   D  |   R  |   W  |   B  |  L1  |           |  L4  |   J  |   F  |   U  |   P  |;/TD(:)|   \    |
- * |--------+------+------+------+------+------|      |           |      |------+------+------+------+-------+--------|
- * | Hyper  |   A  |   S  |   H  |   T  |   G  |------|           |------|   Y  |   N  |   E  |   O  |   I   |   '    |
- * |--------+------+------+------+------+------|  L2  |           | Meh  |------+------+------+------+-------+--------|
- * | LSPCad |   Z  |   X  |   M  |   C  |   V  |      |           |      |   K  |   L  |   ,  |   .  |//Ctrl | RSPCad |
- * `--------+------+------+------+------+-------------'           `-------------+------+------+------+-------+--------'
- *   | CTRL |      | CTRL |  OPT |  CMD |                                       | Left | Down |  Up  | Right |  L3  |
- *   `----------------------------------'                                       `-----------------------------------'
+ * ,---------------------------------------------------.           ,--------------------------------------------------.
+ * | GR_ESC |   1  |   2  |   3  |   4  |   5  |[/DT(+)|           |]/DT(=)|   6  |   7  |   8  |   9  |   0   |   -    |
+ * |--------+------+------+------+------+--------------|           |-------+------+------+------+------+-------+--------|
+ * | Tab    |   Q  |   D  |   R  |   W  |   B  |  L1   |           |  L4   |   J  |   F  |   U  |   P  |;/TD(:)|   \    |
+ * |--------+------+------+------+------+------|       |           |       |------+------+------+------+-------+--------|
+ * | Hyper  |   A  |   S  |   H  |   T  |   G  |-------|           |-------|   Y  |   N  |   E  |   O  |   I   |   '    |
+ * |--------+------+------+------+------+------|  L2   |           |  Meh  |------+------+------+------+-------+--------|
+ * | LSPCad |   Z  |   X  |   M  |   C  |   V  |       |           |       |   K  |   L  |   ,  |   .  |//Ctrl | RSPCad |
+ * `--------+------+------+------+------+--------------'           `--------------+------+------+------+-------+--------'
+ *   | CTRL |      |      |  OPT |  CMD |                                        | Left | Down |  Up  | Right |  L3  |
+ *   `----------------------------------'                                        `-----------------------------------'
  *                                        ,-------------.       ,-------------.
  *                                        |      |      |       |      |        |
  *                                 ,------|------|------|       |------+--------+------.
@@ -45,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_GESC,        KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   KC_LEFT,
+        KC_GESC,        KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   TD(TD_LSQBR_PLUS),
         KC_TAB,         KC_Q,         KC_D,   KC_R,   KC_W,   KC_B,   TG(SYMB),
         ALL_T(KC_BSPC), KC_A,         KC_S,   KC_H,   KC_T,   KC_G,
         KC_LSPO,        KC_Z,         KC_X,   KC_M,   KC_C,   KC_V,   TG(MDIA),
@@ -54,11 +56,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                               KC_HOME,
                                                KC_BSPC, KC_DEL,KC_END,
         // right hand
-             KC_RGHT,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             	KC_MINS,
-             TG(DEAD),    KC_J,   KC_F,   KC_U,   KC_P,   TD(TD_SCOL_COLN),	KC_BSLS,
-                          KC_Y,   KC_N,   KC_E,   KC_O,   KC_I,             	KC_QUOT,
-             MEH_T(KC_NO),KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   	KC_RSPC,
-                                  KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          	KC_FN4,
+             TD(TD_RSQBR_EQ),     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             	KC_MINS,
+             TG(DEAD),            KC_J,   KC_F,   KC_U,   KC_P,   TD(TD_SCOL_COLN),	KC_BSLS,
+                                  KC_Y,   KC_N,   KC_E,   KC_O,   KC_I,             	KC_QUOT,
+             MEH_T(KC_NO),        KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   	KC_RSPC,
+                                          KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          	KC_FN4,
              KC_NO,        KC_NO,
              KC_PGUP,
              KC_PGDN,KC_ENT,KC_SPC
@@ -200,7 +202,9 @@ const uint16_t PROGMEM fn_actions[] = {
 //Tap Dance Definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
   //Tap once for ';' , twice for ':'
-  [TD_SCOL_COLN]  = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN)
+  [TD_SCOL_COLN]  = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
+  [TD_LSQBR_PLUS] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_PLUS),
+  [TD_RSQBR_EQ]   = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_EQL),
 // Other declarations would go here, separated by commas, if you have them
 };
 
