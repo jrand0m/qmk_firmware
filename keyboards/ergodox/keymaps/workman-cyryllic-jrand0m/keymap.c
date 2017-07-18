@@ -20,6 +20,7 @@ enum {
 #define SYMB 1 // symbols
 #define MDIA 2 // media keys
 #define DEAD 3 // dead version of the symbols layer
+#define CRYL 4 // Cyryllic layer
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
@@ -36,7 +37,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   | CTRL |      |      |  OPT |  CMD |                                        | Left | Down |  Up  | Right |  L3  |
  *   `----------------------------------'                                        `-----------------------------------'
  *                                        ,-------------.       ,-------------.
- *                                        |      |      |       |      |        |
+ *                                        |  INS | PRTS |       |      |        |
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | Home |       | PgUp |        |      |
  *                                 |BKSpce|Delete|------|       |------| Enter  |Space |
@@ -52,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         ALL_T(KC_BSPC), KC_A,         KC_S,   KC_H,   KC_T,   KC_G,
         KC_LSPO,        KC_Z,         KC_X,   KC_M,   KC_C,   KC_V,   TG(MDIA),
         KC_LCTL,        KC_NO,        KC_NO,KC_LALT,KC_LGUI,
-                                              KC_NO,  KC_NO,
+                                               KC_INS,  KC_PSCR,
                                                               KC_HOME,
                                                KC_BSPC, KC_DEL,KC_END,
         // right hand
@@ -61,7 +62,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   KC_Y,   KC_N,   KC_E,   KC_O,   KC_I,             	KC_QUOT,
              MEH_T(KC_NO),        KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   	KC_RSPC,
                                           KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          	KC_FN4,
-             KC_NO,        KC_NO,
+             TO(CRYL),        KC_NO,
              KC_PGUP,
              KC_PGDN,KC_ENT,KC_SPC
     ),
@@ -190,6 +191,55 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
 ),
+
+/* Keymap 4: Cirillyc layer
+ * So since i want these letters to be agnostic to OS and keylayout of ED i decided to send just codes via macro
+ * imitating native insertion of Unicode symbols via means of os.  
+ * For Win it will be "alt + <code>" for unix
+ * For Mac it will be "alt + <code>" for unix
+ * For Lin it will be "alt + <code>" for unix
+ * ,---------------------------------------------------.           ,--------------------------------------------------.
+ * | GR_ESC |   1  |   2  |   3  |   4  |   5  |[/DT(+)|           |]/DT(=)|   6  |   7  |   8  |   9  |   0   |   -    |
+ * |--------+------+------+------+------+--------------|           |-------+------+------+------+------+-------+--------|
+ * | Tab    |  YI  |   D  |   R  |   W  |   B  |       |           |       |   J  |   F  |   U  |   P  |;/TD(:)|   \    |
+ * |--------+------+------+------+------+------|       |           |       |------+------+------+------+-------+--------|
+ * | Hyper  |   A  |   S  |   H  |   T  |   G  |-------|           |-------|   Y  |   N  |   E  |   O  |   I   |   '    |
+ * |--------+------+------+------+------+------|       |           |       |------+------+------+------+-------+--------|
+ * | LSPCad |   Z  |   X  |   M  |   C  |   V  |       |           |       |   K  |   L  |   ,  |   .  |//Ctrl | RSPCad |
+ * `--------+------+------+------+------+--------------'           `--------------+------+------+------+-------+--------'
+ *   | CTRL |      |      |  OPT |  CMD |                                        | Left | Down |  Up  | Right |      |
+ *   `----------------------------------'                                        `-----------------------------------'
+ *                                        ,-------------.       ,---------------.
+ *                                        |  INS | PRTS |       |  L0  |        |
+ *                                 ,------|------|------|       |------+--------+------.
+ *                                 |      |      | Home |       | PgUp |        |      |
+ *                                 |BKSpce|Delete|------|       |------| Enter  |Space |
+ *                                 |      |      | End  |       | PgDn |        |      |
+ *                                 `--------------------'       `----------------------'
+ */
+// If it accepts an argument (i.e, is a function), it doesn't need KC_.
+// Otherwise, it needs KC_*
+[CRYL] = KEYMAP(  // layer 0 : default
+        // left hand
+        KC_GESC,        KC_1,         KC_2,         KC_3,         KC_4,         KC_5,         TD(TD_LSQBR_PLUS),
+        KC_TAB,         UC(0x0439),   UC(0x0446),   UC(0x0443),   UC(0x043A),   UC(0x0435),   KC_NO,
+        ALL_T(KC_BSPC), UC(0x0444),   UC(0x0438),   UC(0x0432),   UC(0x0430),   UC(0x043F),
+        KC_LSPO,        UC(0x044F),   UC(0x0447),   UC(0x0441),   UC(0x043C),   UC(0x0456),   KC_NO,
+        KC_LCTL,        KC_NO,        KC_NO,        KC_LALT,      KC_LGUI,
+                                                                    KC_INS,  KC_PSCR,
+                                                                                    KC_HOME,
+                                                                    KC_BSPC, KC_DEL,KC_END,
+        // right hand
+             TD(TD_RSQBR_EQ), KC_6,   KC_7,   KC_8,   KC_9,   KC_0,               KC_MINS,
+             KC_NO,           KC_J,   KC_F,   KC_U,   KC_P,   TD(TD_SCOL_COLN), KC_BSLS,
+                              KC_Y,   KC_N,   KC_E,   KC_O,   KC_I,               KC_QUOT,
+             KC_NO,           KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),     KC_RSPC,
+                                      KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,            KC_FN4,
+             TO(BASE),        KC_NO,
+             KC_PGUP,
+             KC_PGDN,KC_ENT,KC_SPC
+    ),
+
 };
 
 const uint16_t PROGMEM fn_actions[] = {
