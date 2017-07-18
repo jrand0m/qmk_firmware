@@ -201,11 +201,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,---------------------------------------------------.           ,--------------------------------------------------.
  * | GR_ESC |   1  |   2  |   3  |   4  |   5  |[/DT(+)|           |]/DT(=)|   6  |   7  |   8  |   9  |   0   |   -    |
  * |--------+------+------+------+------+--------------|           |-------+------+------+------+------+-------+--------|
- * | Tab    |  YI  |   D  |   R  |   W  |   B  |       |           |       |   J  |   F  |   U  |   P  |;/TD(:)|   \    |
+ * | Tab    |   Й  |   Ц  |   У  |   К  |   Е  |       |           |       |   Н  |   Г  |   Ш  |   Щ  |   З   |   Х    |
  * |--------+------+------+------+------+------|       |           |       |------+------+------+------+-------+--------|
- * | Hyper  |   A  |   S  |   H  |   T  |   G  |-------|           |-------|   Y  |   N  |   E  |   O  |   I   |   '    |
+ * | Hyper  |   Ф  |   И  |   В  |   А  |   П  |-------|           |-------|   Р  |   О  |   Л  |   Д  |   Ж   |   Є    |
  * |--------+------+------+------+------+------|       |           |       |------+------+------+------+-------+--------|
- * | LSPCad |   Z  |   X  |   M  |   C  |   V  |       |           |       |   K  |   L  |   ,  |   .  |//Ctrl | RSPCad |
+ * | LSPCad |   Я  |   Ч  |   С  |   М  |   І  |       |           |       |   Т  |   Ь  |   Б  |   Ю  |//Ctrl | RSPCad |
  * `--------+------+------+------+------+--------------'           `--------------+------+------+------+-------+--------'
  *   | CTRL |      |      |  OPT |  CMD |                                        | Left | Down |  Up  | Right |      |
  *   `----------------------------------'                                        `-----------------------------------'
@@ -230,10 +230,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                                                     KC_HOME,
                                                                     KC_BSPC, KC_DEL,KC_END,
         // right hand
-             TD(TD_RSQBR_EQ), KC_6,   KC_7,   KC_8,   KC_9,   KC_0,               KC_MINS,
-             KC_NO,           KC_J,   KC_F,   KC_U,   KC_P,   TD(TD_SCOL_COLN), KC_BSLS,
-                              KC_Y,   KC_N,   KC_E,   KC_O,   KC_I,               KC_QUOT,
-             KC_NO,           KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),     KC_RSPC,
+             TD(TD_RSQBR_EQ), KC_6,         KC_7,         KC_8,         KC_9,         KC_0,               KC_MINS,
+             KC_NO,           UC(0x043D),   UC(0x0433),   UC(0x0448),   UC(0x0449),   UC(0x0437),         UC(0x0445),
+                              UC(0x0440),   UC(0x043E),   UC(0x043B),   UC(0x0434),   UC(0x0436),         UC(0x0454),
+             KC_NO,           UC(0x0442),   UC(0x044C),   UC(0x0431),   UC(0x044E),   CTL_T(KC_SLSH),     KC_RSPC,
                                       KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,            KC_FN4,
              TO(BASE),        KC_NO,
              KC_PGUP,
@@ -402,8 +402,9 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
-
+    set_unicode_input_mode(UC_WINC);
 };
+
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
