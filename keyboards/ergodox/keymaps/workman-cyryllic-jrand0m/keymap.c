@@ -400,9 +400,13 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
   return MACRO_NONE;
 };
 
+void set_unicode_wrp(uint8_t target) {
+	set_unicode_input_mode(target);
+}
+
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
-    set_unicode_input_mode(UC_WINC);
+    set_unicode_wrp(UC_WINC);
 };
 
 
