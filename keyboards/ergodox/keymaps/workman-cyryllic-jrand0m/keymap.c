@@ -1,6 +1,7 @@
 #include "ergodox.h"
 #include "debug.h"
 #include "action_layer.h"
+#include "process_unicode_common.h"
 // readme
 // This keyboard layout is based on the [Workman Dead layout](https://github.com/ojbucao/Workman/tree/master/mac#workman-dead-for-programmers), which uses the comma as a dead key to trigger a second layer.
 // Since I have more keys at my disposal on the ErgoDox, I moved the dead key to the bottom right. There are still a lot of
@@ -14,6 +15,10 @@ enum {
   TD_LSQBR_PLUS  = 1,
   TD_RSQBR_EQ    = 2,
 };
+enum my_keycodes {
+	JR_SW_OS = = SAFE_RANGE,
+	
+}
 
 // TODO: Define layer names that make sense for the ErgoDox EZ.
 #define BASE 0 // default layer
@@ -210,7 +215,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *   | CTRL |      |      |  OPT |  CMD |                                        | Left | Down |  Up  | Right |      |
  *   `----------------------------------'                                        `-----------------------------------'
  *                                        ,-------------.       ,---------------.
- *                                        |  INS | PRTS |       |  L0  |        |
+ *                                        |  INS | PRTS |       |  L0  |SwitchOS|
  *                                 ,------|------|------|       |------+--------+------.
  *                                 |      |      | Home |       | PgUp |        |      |
  *                                 |BKSpce|Delete|------|       |------| Enter  |Space |
@@ -235,7 +240,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               UC(0x0440),   UC(0x043E),   UC(0x043B),   UC(0x0434),   UC(0x0436),         UC(0x0454),
              KC_NO,           UC(0x0442),   UC(0x044C),   UC(0x0431),   UC(0x044E),   CTL_T(KC_SLSH),     KC_RSPC,
                                       KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,            KC_FN4,
-             TO(BASE),        KC_NO,
+             TO(BASE),        JR_SW_OS,
              KC_PGUP,
              KC_PGDN,KC_ENT,KC_SPC
     ),
@@ -431,5 +436,17 @@ void matrix_scan_user(void) {
             // none
             break;
     }
-
+};
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case JR_SW_OS:
+		uint8_t currentVal = get_unicode_input_mode();
+		if (currentVal < UC_WINC){
+			currentVal = currentVal + 1;
+			set_unicode_input_mode(currentVal);
+		} else {
+			set_unicode_input_mode(UC_OSX);
+		}
+      break;
+  }
 };
