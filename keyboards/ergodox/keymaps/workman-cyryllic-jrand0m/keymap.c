@@ -16,9 +16,9 @@ enum {
   TD_RSQBR_EQ    = 2,
 };
 enum my_keycodes {
-	JR_SW_OS = = SAFE_RANGE,
+	JR_SW_OS = SAFE_RANGE,
 	
-}
+};
 
 // TODO: Define layer names that make sense for the ErgoDox EZ.
 #define BASE 0 // default layer
@@ -438,15 +438,20 @@ void matrix_scan_user(void) {
     }
 };
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	uint8_t currentVal;
   switch (keycode) {
     case JR_SW_OS:
-		uint8_t currentVal = get_unicode_input_mode();
+		currentVal = get_unicode_input_mode();
 		if (currentVal < UC_WINC){
 			currentVal = currentVal + 1;
 			set_unicode_input_mode(currentVal);
 		} else {
 			set_unicode_input_mode(UC_OSX);
 		}
+	return false;
       break;
+	default:
+	return true;
+	break;
   }
 };

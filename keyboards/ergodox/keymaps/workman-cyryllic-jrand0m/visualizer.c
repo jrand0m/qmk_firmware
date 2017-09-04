@@ -35,7 +35,7 @@ static void get_visualizer_layer_and_color(visualizer_state_t* state) {
     if (state->status.layer & 0x10) {
         state->target_lcd_color = LCD_COLOR(216, saturation, 0xFF);
 		uint8_t unicodeB = get_unicode_input_mode();
-		char[26] result = "Ukrainian - ";//12
+		char *result = "Ukrainian - ";//12
 		strcat(result,oses[unicodeB]);
         state->layer_text = result;
 		
