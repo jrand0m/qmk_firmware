@@ -1,4 +1,5 @@
-#include "ergodox.h"
+#include QMK_KEYBOARD_H
+///#include "ergodox.h"
 #include "debug.h"
 #include "action_layer.h"
 #include "process_unicode_common.h"
@@ -11,7 +12,7 @@
 // look forward to learning about a more elegant way to do the same thing. Until then, this will have to do.
 
 enum {
-  TD_SCOL_COLN   = 0,
+//  TD_SCOL_COLN   = 0,
   TD_LSQBR_PLUS  = 1,
   TD_RSQBR_EQ    = 2,
 };
@@ -56,16 +57,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_GESC,        KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   TD(TD_LSQBR_PLUS),
         KC_TAB,         KC_Q,         KC_D,   KC_R,   KC_W,   KC_B,   TG(SYMB),
         KC_BSPC,        KC_A,         KC_S,   KC_H,   KC_T,   KC_G,
-        KC_LSPO,        KC_Z,         KC_X,   KC_M,   KC_C,   KC_V,   TG(MDIA),
+        KC_LSFT,        KC_Z,         KC_X,   KC_M,   KC_C,   KC_V,   TG(MDIA),
         KC_LCTL,        KC_NO,        KC_NO,KC_LALT,KC_LGUI,
                                                KC_INS,  KC_PSCR,
                                                               KC_HOME,
                                                KC_SPC, KC_DEL,KC_END,
         // right hand
              TD(TD_RSQBR_EQ),     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             	KC_MINS,
-             TG(DEAD),            KC_J,   KC_F,   KC_U,   KC_P,   TD(TD_SCOL_COLN),	KC_BSLS,
+             TG(DEAD),            KC_J,   KC_F,   KC_U,   KC_P,   KC_SCLN,		KC_BSLS,
                                   KC_Y,   KC_N,   KC_E,   KC_O,   KC_I,             	KC_QUOT,
-             MEH_T(KC_NO),        KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   	KC_RSPC,
+             MEH_T(KC_NO),        KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   	KC_RSFT,
                                           KC_LEFT,KC_DOWN,KC_UP,  KC_RGHT,          	KC_FN4,
              TO(CRYL),        KC_NO,
              KC_PGUP,
@@ -226,16 +227,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [CRYL] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_GESC,        KC_1,         KC_2,         KC_3,         KC_4,         KC_5,         TD(TD_LSQBR_PLUS),
+        KC_GESC,        KC_1,         KC_2,         KC_3,         KC_4,         KC_5,         KC_NO,
         KC_TAB,         UC(0x0439),   UC(0x0446),   UC(0x0443),   UC(0x043A),   UC(0x0435),   KC_NO,
-        ALL_T(KC_BSPC), UC(0x0444),   UC(0x0438),   UC(0x0432),   UC(0x0430),   UC(0x043F),
+        KC_BSPC,	 UC(0x0444),   UC(0x0438),   UC(0x0432),   UC(0x0430),   UC(0x043F),
         KC_LSPO,        UC(0x044F),   UC(0x0447),   UC(0x0441),   UC(0x043C),   UC(0x0456),   KC_NO,
         KC_LCTL,        KC_NO,        KC_NO,        KC_LALT,      KC_LGUI,
                                                                     KC_INS,  KC_PSCR,
                                                                                     KC_HOME,
-                                                                    KC_BSPC, KC_DEL,KC_END,
+                                                                    KC_SPC, KC_DEL,KC_END,
         // right hand
-             TD(TD_RSQBR_EQ), KC_6,         KC_7,         KC_8,         KC_9,         KC_0,               KC_MINS,
+             KC_NO, KC_6,         KC_7,         KC_8,         KC_9,         KC_0,               KC_MINS,
              KC_NO,           UC(0x043D),   UC(0x0433),   UC(0x0448),   UC(0x0449),   UC(0x0437),         UC(0x0445),
                               UC(0x0440),   UC(0x043E),   UC(0x043B),   UC(0x0434),   UC(0x0436),         UC(0x0454),
              KC_NO,           UC(0x0442),   UC(0x044C),   UC(0x0431),   UC(0x044E),   CTL_T(KC_SLSH),     KC_RSPC,
@@ -255,13 +256,13 @@ const uint16_t PROGMEM fn_actions[] = {
 };
 
 //Tap Dance Definitions
-qk_tap_dance_action_t tap_dance_actions[] = {
+//qk_tap_dance_action_t tap_dance_actions[] = {
   //Tap once for ';' , twice for ':'
-  [TD_SCOL_COLN]  = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
-  [TD_LSQBR_PLUS] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_PLUS),
-  [TD_RSQBR_EQ]   = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_EQL),
+//  [TD_SCOL_COLN]  = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, KC_COLN),
+//  [TD_LSQBR_PLUS] = ACTION_TAP_DANCE_DOUBLE(KC_LBRC, KC_PLUS),
+//  [TD_RSQBR_EQ]   = ACTION_TAP_DANCE_DOUBLE(KC_RBRC, KC_EQL),
 // Other declarations would go here, separated by commas, if you have them
-};
+//};
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {

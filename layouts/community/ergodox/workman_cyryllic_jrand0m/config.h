@@ -1,4 +1,7 @@
-#include "../../config.h"
+#ifndef CONFIG_H_
+#define CONFIG_H_
+
+#include QMK_KEYBOARD_CONFIG_H
 
 #undef TAPPING_TERM
 #define TAPPING_TERM 300
@@ -7,3 +10,4 @@
 #undef NO_DEBUG
 #define NO_DEBUG
 #define FORCE_NKRO
+#endif
