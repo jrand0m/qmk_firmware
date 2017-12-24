@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Otherwise, it needs KC_*
 [BASE] = KEYMAP(  // layer 0 : default
         // left hand
-        KC_GESC,        KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   TD(TD_LSQBR_PLUS),
+        KC_GESC,        KC_1,         KC_2,   KC_3,   KC_4,   KC_5,   BL_STEP,
         KC_TAB,         KC_Q,         KC_D,   KC_R,   KC_W,   KC_B,   TG(SYMB),
         KC_BSPC,        KC_A,         KC_S,   KC_H,   KC_T,   KC_G,
         KC_LSFT,        KC_Z,         KC_X,   KC_M,   KC_C,   KC_V,   TG(MDIA),
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                               KC_HOME,
                                                KC_SPC, KC_DEL,KC_END,
         // right hand
-             TD(TD_RSQBR_EQ),     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             	KC_MINS,
+             BL_TOGG,     KC_6,   KC_7,   KC_8,   KC_9,   KC_0,             	KC_MINS,
              TG(DEAD),            KC_J,   KC_F,   KC_U,   KC_P,   KC_SCLN,		KC_BSLS,
                                   KC_Y,   KC_N,   KC_E,   KC_O,   KC_I,             	KC_QUOT,
              MEH_T(KC_NO),        KC_K,   KC_L,   KC_COMM,KC_DOT, CTL_T(KC_SLSH),   	KC_RSFT,
@@ -439,17 +439,17 @@ void matrix_scan_user(void) {
     }
 };
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-	uint8_t currentVal;
+	//uint8_t currentVal;
   switch (keycode) {
     case JR_SW_OS:
-		currentVal = get_unicode_input_mode();
+		/*currentVal = get_unicode_input_mode();
 		if (currentVal < UC_WINC){
 			currentVal = currentVal + 1;
 			set_unicode_input_mode(currentVal);
 		} else {
 			set_unicode_input_mode(UC_OSX);
-		}
-	return false;
+		}*/
+	return true;
       break;
 	default:
 	return true;

@@ -37,7 +37,7 @@ static void get_visualizer_layer_and_color(visualizer_state_t* state) {
 		uint8_t unicodeB = get_unicode_input_mode();
 		char *result = "Ukrainian - ";//12
 		strcat(result,oses[unicodeB]);
-        state->layer_text = result;
+        state->layer_text = "go away from here";//result;
 		
     }
     else if (state->status.layer & 0x8) {
