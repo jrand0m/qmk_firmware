@@ -44,15 +44,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Shift|   Z  |   X  |   M  |   C  |   V  |   K  |   L  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Brite| Ctrl | Alt  | GUI  |Lower |    Space    | Raise|   -  |  =  |   [   |   ]  |
+ * | Brite| Ctrl | Alt  | GUI  |Lower |    Space    | Raise|   [  |   -  |   =  |  ]   |
  * `-----------------------------------------------------------------------------------'
  */
 [_QDRWB] = {
-  {KC_TILD,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,    KC_7,    KC_8,     KC_9,     KC_0,     KC_ESC},
+  {KC_ESC,   KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                KC_6,    KC_7,    KC_8,     KC_9,     KC_0,     KC_TILD},
   {KC_TAB,    KC_Q,    KC_D,    KC_R,    KC_W,    KC_B,                KC_J,    KC_F,    KC_U,     KC_P,     KC_SCLN,  KC_BSLASH},
-  {LT(_RAISE, KC_BSPC),KC_A,    KC_S,    KC_H,    KC_T,                KC_G,    KC_Y,    KC_N,     KC_E,     KC_O,     KC_I, KC_QUOT},
+  {KC_BSPC,   KC_A,    KC_S,    KC_H,    KC_T,    KC_G,    KC_Y,    KC_N,     KC_E,     KC_O,     KC_I, KC_QUOT},
   {KC_LSFT,   KC_Z,    KC_X,    KC_M,    KC_C,    KC_V,                KC_K,    KC_L,    KC_COMM,  KC_DOT,   KC_SLSH,  KC_ENT },
-  {KC_LCTL, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   LT(_LOWER, KC_SPC),  KC_SPC,  RAISE,   KC_MINUS, KC_EQUAL, KC_LBRC,  KC_RBRC}
+  {KC_LCTL, KC_LCTL, KC_LALT, KC_LGUI, LOWER,   LT(_LOWER, KC_SPC),  KC_SPC,  RAISE,   KC_LBRC,  KC_MINUS,KC_EQUAL,  KC_RBRC}
 },
 
 /* QWERTY
@@ -123,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Mute | BkSpc|   Up |  Del | Forwd| MBtn1|   MUp| MBtn2|   /  |   7  |   8  |  9   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | Left | Down | Right| Refr  MLeft|  MDn  |MRight|   *  |   4  |   5  |  6   |
+ * |      | Left | up   | down | Refr  MLeft|  MDn  |MRight|   *  |   4  |   5  |  6   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |  Vol+| Prev | Play | Next | Back |  MWDn| MBtn3| MWUp |  -   |   1  |  2   |  3   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -132,9 +132,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = {
   {KC_GRV,  KC_F1,    KC_F2,   KC_F3,    KC_F4,          KC_F5,   KC_F6,   KC_F7,   KC_F8,    KC_F9,   KC_F10, KC_DEL},
-  {KC_MUTE, KC_BSPC,  KC_UP,   KC_DEL,   KC_WWW_FORWARD, KC_BTN1, KC_MS_U, KC_BTN2, KC_PSLS,  KC_P7,   KC_P8,  KC_P9},
-  {_______, KC_LEFT,  KC_DOWN, KC_RIGHT, KC_WWW_REFRESH, KC_MS_L, KC_MS_D, KC_MS_R, KC_PAST,  KC_P4,   KC_P5,  KC_P6},
-  {KC_VOLU, KC_MPRV,  KC_MPLY, KC_MNXT,  KC_WWW_BACK,    KC_WH_D, KC_BTN3, KC_WH_U, KC_PMNS,  KC_P1,   KC_P2,  KC_P3},
+  {KC_MUTE, KC_BSPC,  KC_WWW_REFRESH,   KC_DEL,   KC_WWW_FORWARD, KC_BTN1, KC_MS_U, KC_BTN2, KC_PSLS,  KC_P7,   KC_P8,  KC_P9},
+  {KC_VOLU, KC_LEFT,  KC_UP , KC_DOWN, KC_RIGHT, KC_MS_L, KC_MS_D, KC_MS_R, KC_PAST,  KC_P4,   KC_P5,  KC_P6},
+  {KC_VOLD, KC_MPRV,  KC_MPLY, KC_MNXT,  KC_WWW_BACK,    KC_WH_D, KC_BTN3, KC_WH_U, KC_PMNS,  KC_P1,   KC_P2,  KC_P3},
   {KC_VOLD, _______,  _______, _______,  _______,        _______, _______, _______, KC_PPLS,  KC_PENT, KC_P0,  KC_PDOT}
 },
 
@@ -152,9 +152,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_RAISE] = {
-  {KC_GRV, KC_EXLM, KC_AT,    KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN,  KC_RPRN, KC_BSPC},
+  {KC_GRV , KC_EXLM, KC_AT ,  KC_HASH, KC_DLR , KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN,  KC_RPRN, KC_BSPC},
   {_______, KC_BSPC, KC_PGUP, KC_DEL,  _______, _______, _______, KC_PGUP, KC_UP,   _______,  _______, _______},
-  {_______, KC_HOME, KC_PGDN, KC_END,  _______, _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, _______, _______},
+  {_______, KC_HOME, KC_PGDN, KC_END,  KC_END , _______, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, _______, _______},
   {_______, KC_PAUSE, KC_INS, _______, KC_PSCR, KC_PSCR, _______, KC_END,  _______, _______,  _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, _______}
 },
